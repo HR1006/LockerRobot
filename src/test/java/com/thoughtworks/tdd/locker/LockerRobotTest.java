@@ -43,4 +43,17 @@ public class LockerRobotTest {
         locker.depositBag(bag);
         locker.pickUpBag(new Ticket(Constants.SIZE_S));
     }
+
+    @Test
+    public void should_return_ticket_when_xiaoying_deposit_bag_given_one_PrimaryLockerRobot_with_two_locker_with_free_capacity() {
+        Bag bag = new Bag(Constants.SIZE_M);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker1 = initLocker(Constants.SIZE_M, 1, 1);
+        primaryLockerRobot.addLocker(locker1);
+        Locker locker2 = initLocker(Constants.SIZE_M, 1, 1);
+        primaryLockerRobot.addLocker(locker2);
+        Ticket ticket = primaryLockerRobot.depositBag(bag);
+        Bag result = locker1.pickUpBag(ticket);
+        Assert.assertEquals(result, bag);
+    }
 }

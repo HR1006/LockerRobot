@@ -3,7 +3,8 @@ package com.thoughtworks.tdd.locker;
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import com.thoughtworks.tdd.locker.exception.TicketSizeNotMatchException;
-import com.thoughtworks.tdd.locker.robot.PrimaryLockerRobot;
+import com.thoughtworks.tdd.locker.storeable.Locker;
+import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
 

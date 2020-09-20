@@ -1,5 +1,7 @@
-package com.thoughtworks.tdd.locker;
+package com.thoughtworks.tdd.locker.storeable;
 
+import com.thoughtworks.tdd.locker.Bag;
+import com.thoughtworks.tdd.locker.Ticket;
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import com.thoughtworks.tdd.locker.exception.TicketSizeNotMatchException;
@@ -7,7 +9,7 @@ import com.thoughtworks.tdd.locker.exception.TicketSizeNotMatchException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Locker {
+public class Locker implements Storeable {
     private final String size;
     private final int capacity;
     private final Map<Ticket, Bag> mapping = new HashMap<>();
@@ -25,10 +27,12 @@ public class Locker {
         return getCapacity() -  mapping.size();
     }
 
+    @Override
     public boolean isValidTicket(Ticket ticket) {
         return mapping.containsKey(ticket);
     }
 
+    @Override
     public Ticket depositBag(Bag bag) {
         Ticket ticket;
         if (freeCapacity() == 0) {
@@ -40,6 +44,7 @@ public class Locker {
         return ticket;
     }
 
+    @Override
     public Bag pickUpBag(Ticket ticket) {
         if (size.equals(ticket.getSize())) {
             Bag bag = mapping.remove(ticket);;

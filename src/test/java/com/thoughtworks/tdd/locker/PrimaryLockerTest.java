@@ -2,7 +2,9 @@ package com.thoughtworks.tdd.locker;
 
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
-import com.thoughtworks.tdd.locker.robot.PrimaryLockerRobot;
+import com.thoughtworks.tdd.locker.exception.TicketSizeNotMatchException;
+import com.thoughtworks.tdd.locker.storeable.Locker;
+import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -56,5 +58,19 @@ public class PrimaryLockerTest {
         primaryLockerRobot.addLocker(locker);
         primaryLockerRobot.depositBag(bag);
         primaryLockerRobot.pickUpBag(new Ticket(Constants.SIZE_M));
+    }
+
+    @Test(expected = TicketSizeNotMatchException.class)
+    public void should_return_prompt_when_xiaoying_pick_up_bag_given_valid_S_size_ticket() {
+        Bag bag = new Bag(Constants.SIZE_S);
+        Locker locker = initLocker(Constants.SIZE_S, 1, 1);
+        Ticket ticket = locker.depositBag(bag);
+
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker2 = initLocker(Constants.SIZE_M, 1, 1);
+        primaryLockerRobot.addLocker(locker2);
+        primaryLockerRobot.depositBag(bag);
+
+        locker2.pickUpBag(ticket);
     }
 }

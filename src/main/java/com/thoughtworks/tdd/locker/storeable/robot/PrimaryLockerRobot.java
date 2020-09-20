@@ -1,7 +1,7 @@
-package com.thoughtworks.tdd.locker.robot;
+package com.thoughtworks.tdd.locker.storeable.robot;
 
 import com.thoughtworks.tdd.locker.Bag;
-import com.thoughtworks.tdd.locker.Locker;
+import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.Ticket;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 

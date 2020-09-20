@@ -35,4 +35,12 @@ public class LockerRobotTest {
         Bag result = locker.pickUpBag(ticket);
         Assert.assertEquals(bag, result);
     }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_return_prompt_when_xiaoying_pick_up_bag_given_invalid_S_size_ticket() {
+        Bag bag = new Bag(Constants.SIZE_S);
+        Locker locker = initLocker(Constants.SIZE_S, 1, 1);
+        locker.depositBag(bag);
+        locker.pickUpBag(new Ticket(Constants.SIZE_S));
+    }
 }

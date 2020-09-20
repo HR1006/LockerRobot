@@ -34,6 +34,9 @@ public class Locker {
 
     public Bag pickUpBag(Ticket ticket) {
         Bag bag = mapping.remove(ticket);;
+        if (bag == null) {
+            throw new InvalidTicketException();
+        }
         return bag;
     }
 }

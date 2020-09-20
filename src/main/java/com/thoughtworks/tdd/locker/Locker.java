@@ -21,6 +21,10 @@ public class Locker {
         return getCapacity() -  mapping.size();
     }
 
+    public boolean isValidTicket(Ticket ticket) {
+        return mapping.containsKey(ticket);
+    }
+
     public Ticket depositBag(Bag bag) {
         Ticket ticket;
         if (freeCapacity() == 0) {

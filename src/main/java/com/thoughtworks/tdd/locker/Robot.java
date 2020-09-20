@@ -17,4 +17,13 @@ public abstract class Robot {
 
     public abstract Ticket depositBag(Bag bag);
 
+    public Bag pickUpBag(Ticket ticket) {
+        for (Locker locker : getLockers()) {
+            if (locker.isValidTicket(ticket)) {
+                return locker.pickUpBag(ticket);
+            }
+        }
+        throw new InvalidTicketException();
+    }
+
 }

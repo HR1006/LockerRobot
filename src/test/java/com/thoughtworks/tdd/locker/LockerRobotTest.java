@@ -56,4 +56,13 @@ public class LockerRobotTest {
         Bag result = locker1.pickUpBag(ticket);
         Assert.assertEquals(result, bag);
     }
+
+    @Test(expected = LockerFullException.class)
+    public void should_return_prompt_when_xiaoying_deposit_bag_given_one_PrimaryLockerRobot_with_one_locker_with_full_capacity() {
+        Bag bag = new Bag(Constants.SIZE_M);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker = initLocker(Constants.SIZE_M, 1, 0);
+        primaryLockerRobot.addLocker(locker);
+        primaryLockerRobot.depositBag(bag);
+    }
 }

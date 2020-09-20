@@ -23,6 +23,10 @@ public class PrimaryLockerRobot extends Robot {
                 break;
             }
         }
-        return ticket;
+        if (ticket == null) {
+            throw new LockerFullException();
+        } else {
+            return ticket;
+        }
     }
 }

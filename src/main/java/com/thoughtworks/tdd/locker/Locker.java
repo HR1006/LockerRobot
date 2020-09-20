@@ -31,4 +31,9 @@ public class Locker {
         }
         return ticket;
     }
+
+    public Bag pickUpBag(Ticket ticket) {
+        Bag bag = mapping.remove(ticket);;
+        return bag;
+    }
 }

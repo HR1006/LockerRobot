@@ -26,4 +26,13 @@ public class LockerRobotTest {
         Locker locker = initLocker(Constants.SIZE_S, 1, 0);
         locker.depositBag(bag);
     }
+
+    @Test
+    public void should_return_bag_when_xiaoying_pick_up_bag_given_valid_S_size_ticket() {
+        Bag bag = new Bag(Constants.SIZE_S);
+        Locker locker = initLocker(Constants.SIZE_S, 1, 1);
+        Ticket ticket = locker.depositBag(bag);
+        Bag result = locker.pickUpBag(ticket);
+        Assert.assertEquals(bag, result);
+    }
 }

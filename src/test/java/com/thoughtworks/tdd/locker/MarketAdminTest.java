@@ -3,6 +3,7 @@ package com.thoughtworks.tdd.locker;
 import com.thoughtworks.tdd.locker.exception.SizeNotMatchException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
+import com.thoughtworks.tdd.locker.storeable.robot.SuperLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,5 +40,13 @@ public class MarketAdminTest {
         primaryLockerRobot.addLocker(locker1);
         Locker locker2 = new Locker(Constants.SIZE_L, 1);
         primaryLockerRobot.addLocker(locker2);
+    }
+
+    @Test
+    public void should_success_when_add_locker_to_SuperLockerRobot_given_one_L_locker() {
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        Locker locker = new Locker(Constants.SIZE_L, 1);
+        superLockerRobot.addLocker(locker);
+        Assert.assertEquals(superLockerRobot.getLockers().get(0), locker);
     }
 }

@@ -19,4 +19,11 @@ public class LockerRobotTest {
         Ticket ticket = locker.depositBag(bag);
         Assert.assertNotNull(ticket);
     }
+
+    @Test(expected = LockerFullException.class)
+    public void should_return_prompt_when_xiaoying_deposit_bag_given_one_S_bag_one_S_locker_with_full_capacity() {
+        Bag bag = new Bag(Constants.SIZE_S);
+        Locker locker = initLocker(Constants.SIZE_S, 1, 0);
+        locker.depositBag(bag);
+    }
 }

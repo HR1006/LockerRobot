@@ -19,6 +19,10 @@ public class Locker implements Storeable {
         this.capacity = capacity;
     }
 
+    public String getSize() {
+        return size;
+    }
+
     public int getCapacity() {
         return capacity;
     }

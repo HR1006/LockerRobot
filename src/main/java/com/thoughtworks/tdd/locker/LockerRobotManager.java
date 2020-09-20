@@ -2,10 +2,10 @@ package com.thoughtworks.tdd.locker;
 
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
+import com.thoughtworks.tdd.locker.exception.SizeNotMatchException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.Storeable;
 import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
-import com.thoughtworks.tdd.locker.storeable.robot.Robot;
 import com.thoughtworks.tdd.locker.storeable.robot.SuperLockerRobot;
 
 import java.util.ArrayList;
@@ -16,7 +16,16 @@ public class LockerRobotManager {
     private final List<Storeable> storeables = new ArrayList<>();
 
     public void addStoreable(Storeable storeable) {
-        storeables.add(storeable);
+        Storeable addStoreable = null;
+        if (storeable instanceof Locker
+                && Constants.SIZE_S.equals(((Locker) storeable).getSize())) {
+            addStoreable = storeable;
+        }
+        if (addStoreable == null) {
+            throw new SizeNotMatchException();
+        } else {
+            storeables.add(storeable);
+        }
     }
 
     public Ticket depositBagByStoreableType(Class<? extends Storeable> clazz, Bag bag) {

@@ -4,6 +4,7 @@ import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
+import com.thoughtworks.tdd.locker.storeable.robot.SuperLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -104,5 +105,21 @@ public class LockerRobotManagerTest {
         manager.addStoreable(primaryLockerRobot);
         manager.depositBag(bag);
         manager.pickUpBag(new Ticket(Constants.SIZE_M));
+    }
+
+    @Test
+    public void should_return_ticket_when_one_L_bag_one_S_locker_with_free_capacity_one_PrimaryLockerRobot_with_one_M_locker_with_free_capacity_one_SuperLockerRobot_with_one_L_locker_with_free_capacity() {
+        LockerRobotManager manager = new LockerRobotManager();
+        Locker locker = initLocker(Constants.SIZE_S, 1, 1);
+        manager.addStoreable(locker);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.addLocker(initLocker(Constants.SIZE_M, 1, 1));
+        manager.addStoreable(primaryLockerRobot);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.addLocker(initLocker(Constants.SIZE_L, 1, 1));
+        manager.addStoreable(superLockerRobot);
+        Bag bag = new Bag(Constants.SIZE_L);
+        Ticket ticket = manager.depositBag(bag);
+        Assert.assertEquals(superLockerRobot.pickUpBag(ticket), bag);
     }
 }

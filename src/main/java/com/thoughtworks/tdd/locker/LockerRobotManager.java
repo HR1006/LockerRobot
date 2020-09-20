@@ -6,6 +6,7 @@ import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.Storeable;
 import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
 import com.thoughtworks.tdd.locker.storeable.robot.Robot;
+import com.thoughtworks.tdd.locker.storeable.robot.SuperLockerRobot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,9 @@ public class LockerRobotManager {
         }
         if (Constants.SIZE_M.equals(bag.getSize())) {
             ticket = depositBagByRobotType(PrimaryLockerRobot.class, bag);
+        }
+        if (Constants.SIZE_L.equals(bag.getSize())) {
+            ticket = depositBagByRobotType(SuperLockerRobot.class, bag);
         }
         if (ticket != null) {
             return ticket;

@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd.locker;
 
+import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.Storeable;
@@ -38,5 +39,14 @@ public class LockerRobotManager {
             return ticket;
         }
         throw new LockerFullException();
+    }
+
+    public Bag pickUpBag(Ticket ticket) {
+        for (Storeable storeable : storeables) {
+            if (storeable.isValidTicket(ticket)) {
+                return storeable.pickUpBag(ticket);
+            }
+        }
+        throw new InvalidTicketException();
     }
 }

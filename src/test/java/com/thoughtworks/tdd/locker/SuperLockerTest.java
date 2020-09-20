@@ -34,4 +34,15 @@ public class SuperLockerTest {
         superLockerRobot.addLocker(locker);
         superLockerRobot.depositBag(bag);
     }
+
+    @Test
+    public void should_return_bag_when_xiaoying_pick_up_bag_given_one_SuperLockerRobot_one_valid_ticket() {
+        Bag bag = new Bag(Constants.SIZE_L);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        Locker locker = initLocker(Constants.SIZE_L, 1, 1);
+        superLockerRobot.addLocker(locker);
+        Ticket ticket = superLockerRobot.depositBag(bag);
+        Bag result = superLockerRobot.pickUpBag(ticket);
+        Assert.assertEquals(result, bag);
+    }
 }

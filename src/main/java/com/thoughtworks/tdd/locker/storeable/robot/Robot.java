@@ -31,6 +31,17 @@ public abstract class Robot implements Storeable {
         return false;
     }
 
+    public Ticket depositBagOrNot(Bag bag) {
+        Ticket ticket = null;
+        for (Locker locker : getLockers()) {
+            if (locker.freeCapacity() > 0) {
+                ticket = locker.depositBag(bag);
+                break;
+            }
+        }
+        return ticket;
+    }
+
     @Override
     public Bag pickUpBag(Ticket ticket) {
         for (Locker locker : getLockers()) {

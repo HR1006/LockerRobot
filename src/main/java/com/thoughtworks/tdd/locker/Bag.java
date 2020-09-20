@@ -5,4 +5,8 @@ public class Bag {
     public Bag(String size) {
         this.size = size;
     }
+
+    public String getSize() {
+        return size;
+    }
 }

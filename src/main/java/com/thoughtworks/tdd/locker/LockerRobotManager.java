@@ -4,6 +4,8 @@ import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.Storeable;
+import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
+import com.thoughtworks.tdd.locker.storeable.robot.Robot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +34,33 @@ public class LockerRobotManager {
         return ticket;
     }
 
+    public Ticket depositBagByRobotType(Class<? extends Robot> clazz, Bag bag) {
+        Ticket ticket = null;
+        for (Robot robot : getRobotsByType(clazz)) {
+            ticket = robot.depositBagOrNot(bag);
+            if (ticket != null) {
+                break;
+            }
+        }
+        return ticket;
+    }
+
+    public List<? extends Robot> getRobotsByType(Class<? extends Robot> clazz) {
+        return storeables
+                .stream()
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .collect(Collectors.toList());
+    }
+
     public Ticket depositBag(Bag bag) {
-        Ticket ticket;
-        ticket = depositBagByLocker(bag);
+        Ticket ticket = null;
+        if (Constants.SIZE_S.equals(bag.getSize())) {
+            ticket = depositBagByLocker(bag);
+        }
+        if (Constants.SIZE_M.equals(bag.getSize())) {
+            ticket = depositBagByRobotType(PrimaryLockerRobot.class, bag);
+        }
         if (ticket != null) {
             return ticket;
         }

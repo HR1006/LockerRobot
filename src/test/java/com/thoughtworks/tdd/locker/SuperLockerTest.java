@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd.locker;
 
+import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -44,5 +45,15 @@ public class SuperLockerTest {
         Ticket ticket = superLockerRobot.depositBag(bag);
         Bag result = superLockerRobot.pickUpBag(ticket);
         Assert.assertEquals(result, bag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_return_prompt_when_xiaoying_pick_up_bag_given_one_SuperLockerRobot_one_invalid_ticket() {
+        Bag bag = new Bag(Constants.SIZE_L);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        Locker locker = initLocker(Constants.SIZE_L, 1, 1);
+        superLockerRobot.addLocker(locker);
+        superLockerRobot.depositBag(bag);
+        superLockerRobot.pickUpBag(new Ticket(Constants.SIZE_M));
     }
 }

@@ -1,4 +1,8 @@
-package com.thoughtworks.tdd.locker;
+package com.thoughtworks.tdd.locker.robot;
+
+import com.thoughtworks.tdd.locker.Bag;
+import com.thoughtworks.tdd.locker.Locker;
+import com.thoughtworks.tdd.locker.Ticket;
 
 import java.util.ArrayList;
 import java.util.Comparator;

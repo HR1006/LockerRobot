@@ -2,6 +2,7 @@ package com.thoughtworks.tdd.locker;
 
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
+import com.thoughtworks.tdd.locker.robot.SuperLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
 

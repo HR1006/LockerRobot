@@ -6,4 +6,8 @@ public class Ticket {
     public Ticket(String size){
         this.size = size;
     }
+
+    public String getSize() {
+        return size;
+    }
 }

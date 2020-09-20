@@ -33,7 +33,7 @@ public class Locker implements Storeable {
     }
 
     @Override
-    public Ticket depositBag(Bag bag) {
+    public Ticket depositBagOrNot(Bag bag) {
         Ticket ticket;
         if (freeCapacity() == 0) {
             throw new LockerFullException();
@@ -42,6 +42,11 @@ public class Locker implements Storeable {
             mapping.put(ticket, bag);
         }
         return ticket;
+    }
+
+    @Override
+    public Ticket depositBag(Bag bag) {
+        return depositBagOrNot(bag);
     }
 
     @Override

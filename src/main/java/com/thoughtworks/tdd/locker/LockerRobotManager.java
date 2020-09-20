@@ -19,26 +19,10 @@ public class LockerRobotManager {
         storeables.add(storeable);
     }
 
-    public Ticket depositBagByLocker(Bag bag) {
+    public Ticket depositBagByStoreableType(Class<? extends Storeable> clazz, Bag bag) {
         Ticket ticket = null;
-        List<Locker> lockers = storeables
-                .stream()
-                .filter(storeable -> storeable instanceof Locker)
-                .map(storeable -> (Locker) storeable)
-                .collect(Collectors.toList());
-        for (Locker locker : lockers) {
-            if (locker.freeCapacity() > 0) {
-                ticket = locker.depositBag(bag);
-                break;
-            }
-        }
-        return ticket;
-    }
-
-    public Ticket depositBagByRobotType(Class<? extends Robot> clazz, Bag bag) {
-        Ticket ticket = null;
-        for (Robot robot : getRobotsByType(clazz)) {
-            ticket = robot.depositBagOrNot(bag);
+        for (Storeable storeable : getStoreablesByType(clazz)) {
+            ticket = storeable.depositBagOrNot(bag);
             if (ticket != null) {
                 break;
             }
@@ -46,7 +30,7 @@ public class LockerRobotManager {
         return ticket;
     }
 
-    public List<? extends Robot> getRobotsByType(Class<? extends Robot> clazz) {
+    public List<? extends Storeable> getStoreablesByType(Class<? extends Storeable> clazz) {
         return storeables
                 .stream()
                 .filter(clazz::isInstance)
@@ -57,13 +41,13 @@ public class LockerRobotManager {
     public Ticket depositBag(Bag bag) {
         Ticket ticket = null;
         if (Constants.SIZE_S.equals(bag.getSize())) {
-            ticket = depositBagByLocker(bag);
+            ticket = depositBagByStoreableType(Locker.class, bag);
         }
         if (Constants.SIZE_M.equals(bag.getSize())) {
-            ticket = depositBagByRobotType(PrimaryLockerRobot.class, bag);
+            ticket = depositBagByStoreableType(PrimaryLockerRobot.class, bag);
         }
         if (Constants.SIZE_L.equals(bag.getSize())) {
-            ticket = depositBagByRobotType(SuperLockerRobot.class, bag);
+            ticket = depositBagByStoreableType(SuperLockerRobot.class, bag);
         }
         if (ticket != null) {
             return ticket;

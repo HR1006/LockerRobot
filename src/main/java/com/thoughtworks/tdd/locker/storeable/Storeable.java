@@ -9,4 +9,6 @@ public interface Storeable {
     Bag pickUpBag(Ticket ticket);
 
     boolean isValidTicket(Ticket ticket);
+
+    Ticket depositBagOrNot(Bag bag);
 }

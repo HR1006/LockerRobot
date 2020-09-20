@@ -82,4 +82,16 @@ public class LockerRobotManagerTest {
         Bag bag = new Bag(Constants.SIZE_M);
         manager.depositBag(bag);
     }
+
+    @Test
+    public void should_return_bag_when_pick_up_bag_given_valid_M_size_ticket() {
+        LockerRobotManager manager = new LockerRobotManager();
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.addLocker(initLocker(Constants.SIZE_M, 1, 1));
+        Bag bag = new Bag(Constants.SIZE_M);
+        manager.addStoreable(primaryLockerRobot);
+        Ticket ticket = manager.depositBag(bag);
+        Bag result= manager.pickUpBag(ticket);
+        Assert.assertEquals(bag, result);
+    }
 }

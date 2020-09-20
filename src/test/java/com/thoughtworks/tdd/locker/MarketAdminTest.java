@@ -2,6 +2,7 @@ package com.thoughtworks.tdd.locker;
 
 import com.thoughtworks.tdd.locker.exception.SizeNotMatchException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
+import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,5 +22,13 @@ public class MarketAdminTest {
         manager.addStoreable(locker1);
         Locker locker2 = new Locker(Constants.SIZE_L, 1);
         manager.addStoreable(locker2);
+    }
+
+    @Test
+    public void should_success_when_add_locker_to_PrimaryLockerRobot_given_one_M_locker() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker = new Locker(Constants.SIZE_M, 1);
+        primaryLockerRobot.addLocker(locker);
+        Assert.assertEquals(primaryLockerRobot.getLockers().get(0), locker);
     }
 }

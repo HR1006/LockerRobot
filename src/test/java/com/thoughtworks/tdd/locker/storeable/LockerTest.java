@@ -1,9 +1,11 @@
-package com.thoughtworks.tdd.locker;
+package com.thoughtworks.tdd.locker.storeable;
 
+import com.thoughtworks.tdd.locker.Bag;
+import com.thoughtworks.tdd.locker.Constants;
+import com.thoughtworks.tdd.locker.Ticket;
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
 import com.thoughtworks.tdd.locker.exception.TicketSizeNotMatchException;
-import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.storeable.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;

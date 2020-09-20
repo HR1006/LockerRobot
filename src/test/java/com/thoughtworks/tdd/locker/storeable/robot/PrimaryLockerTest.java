@@ -5,6 +5,7 @@ import com.thoughtworks.tdd.locker.Constants;
 import com.thoughtworks.tdd.locker.Ticket;
 import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
+import com.thoughtworks.tdd.locker.exception.SizeNotMatchException;
 import com.thoughtworks.tdd.locker.exception.TicketSizeNotMatchException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import org.junit.Assert;
@@ -74,5 +75,22 @@ public class PrimaryLockerTest {
         primaryLockerRobot.depositBag(bag);
 
         locker2.pickUpBag(ticket);
+    }
+
+    @Test
+    public void should_success_when_add_locker_to_PrimaryLockerRobot_given_one_M_locker() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker = new Locker(Constants.SIZE_M, 1);
+        primaryLockerRobot.addLocker(locker);
+        Assert.assertEquals(primaryLockerRobot.getLockers().get(0), locker);
+    }
+
+    @Test(expected = SizeNotMatchException.class)
+    public void should_prompt_when_add_locker_to_PrimaryLockerRobot_given_one_S_locker_one_L_locker() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker(Constants.SIZE_S, 1);
+        primaryLockerRobot.addLocker(locker1);
+        Locker locker2 = new Locker(Constants.SIZE_L, 1);
+        primaryLockerRobot.addLocker(locker2);
     }
 }

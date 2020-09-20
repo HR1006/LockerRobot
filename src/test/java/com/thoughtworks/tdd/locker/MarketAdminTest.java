@@ -31,4 +31,13 @@ public class MarketAdminTest {
         primaryLockerRobot.addLocker(locker);
         Assert.assertEquals(primaryLockerRobot.getLockers().get(0), locker);
     }
+
+    @Test(expected = SizeNotMatchException.class)
+    public void should_prompt_when_add_locker_to_PrimaryLockerRobot_given_one_S_locker_one_L_locker() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker(Constants.SIZE_S, 1);
+        primaryLockerRobot.addLocker(locker1);
+        Locker locker2 = new Locker(Constants.SIZE_L, 1);
+        primaryLockerRobot.addLocker(locker2);
+    }
 }

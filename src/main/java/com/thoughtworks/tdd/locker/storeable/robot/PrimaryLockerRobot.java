@@ -1,6 +1,8 @@
 package com.thoughtworks.tdd.locker.storeable.robot;
 
 import com.thoughtworks.tdd.locker.Bag;
+import com.thoughtworks.tdd.locker.Constants;
+import com.thoughtworks.tdd.locker.exception.SizeNotMatchException;
 import com.thoughtworks.tdd.locker.storeable.Locker;
 import com.thoughtworks.tdd.locker.Ticket;
 import com.thoughtworks.tdd.locker.exception.LockerFullException;
@@ -16,7 +18,11 @@ public class PrimaryLockerRobot extends Robot {
     }
 
     public void addLocker(Locker locker) {
-        lockers.add(locker);
+        if (Constants.SIZE_M.equals(locker.getSize())) {
+            lockers.add(locker);
+        } else {
+            throw new SizeNotMatchException();
+        }
     }
 
     @Override

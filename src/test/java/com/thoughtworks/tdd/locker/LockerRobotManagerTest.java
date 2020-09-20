@@ -70,4 +70,16 @@ public class LockerRobotManagerTest {
         Ticket ticket = manager.depositBag(bag);
         Assert.assertEquals(primaryLockerRobot.pickUpBag(ticket), bag);
     }
+
+    @Test(expected = LockerFullException.class)
+    public void should_return_prompt_when_one_M_bag_one_S_locker_with_free_capacity_one_PrimaryLockerRobot_with_one_M_locker_with_full_capacity() {
+        LockerRobotManager manager = new LockerRobotManager();
+        Locker locker = initLocker(Constants.SIZE_S, 1, 1);
+        manager.addStoreable(locker);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.addLocker(initLocker(Constants.SIZE_M, 1, 0));
+        manager.addStoreable(primaryLockerRobot);
+        Bag bag = new Bag(Constants.SIZE_M);
+        manager.depositBag(bag);
+    }
 }

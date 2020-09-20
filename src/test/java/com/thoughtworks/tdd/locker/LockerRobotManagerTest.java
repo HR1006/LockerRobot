@@ -94,4 +94,15 @@ public class LockerRobotManagerTest {
         Bag result= manager.pickUpBag(ticket);
         Assert.assertEquals(bag, result);
     }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_return_prompt_when_pick_up_bag_given_invalid_ticket() {
+        LockerRobotManager manager = new LockerRobotManager();
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.addLocker(initLocker(Constants.SIZE_M, 1, 1));
+        Bag bag = new Bag(Constants.SIZE_M);
+        manager.addStoreable(primaryLockerRobot);
+        manager.depositBag(bag);
+        manager.pickUpBag(new Ticket(Constants.SIZE_M));
+    }
 }

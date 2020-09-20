@@ -1,5 +1,8 @@
 package com.thoughtworks.tdd.locker;
 
+import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
+import com.thoughtworks.tdd.locker.exception.LockerFullException;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,5 +1,7 @@
 package com.thoughtworks.tdd.locker;
 
+import com.thoughtworks.tdd.locker.exception.InvalidTicketException;
+
 import java.util.ArrayList;
 import java.util.List;
 
